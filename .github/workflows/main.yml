@@ -17,15 +17,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      # Install Node.js 18
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
       # Install dependencies
       - name: Install Dependencies
         run: yarn install
         continue-on-error: false
-
-    #   # Run tests
-    #   - name: Run Tests
-    #     run: npm test
-    #     continue-on-error: false
 
       # Build the app
       - name: Build
@@ -57,4 +58,4 @@ jobs:
         #   author_email: ${{ github.actor }}@users.noreply.github.com
         env:
           GITHUB_TOKEN: ${{secrets.TOKEN_GIT}}
-        continue-on-error: false
+          continue-on-error: false
