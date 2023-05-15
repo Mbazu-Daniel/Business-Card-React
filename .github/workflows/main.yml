@@ -16,12 +16,14 @@ jobs:
       # Checkout the repository
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          ref: main
 
-      # Install Node.js 18
+      # Install Node.js 16
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 18
+          node-version: 16
 
       # Install dependencies
       - name: Install Dependencies
@@ -37,7 +39,7 @@ jobs:
       # Deploy to Vercel
       - name: Deploy to Vercel
         if: success() && github.ref == 'refs/heads/main' # Only deploy on successful push to main branch
-        uses: amondnet/vercel-action@v20
+        uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: jvCrSsQzBxvOptQnDziZxKL1
@@ -58,4 +60,4 @@ jobs:
         #   author_email: ${{ github.actor }}@users.noreply.github.com
         env:
           GITHUB_TOKEN: ${{secrets.TOKEN_GIT}}
-          continue-on-error: false
+        continue-on-error: false
