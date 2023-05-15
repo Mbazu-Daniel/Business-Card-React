@@ -44,8 +44,6 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: jvCrSsQzBxvOptQnDziZxKL1
           vercel-project-id: prj_R5mBcWd8plLoPoCNiP8Wl0KZxLO6
-          build-dir: ./build
-          prod: true
         continue-on-error: false
 
       # Merge to main branch
