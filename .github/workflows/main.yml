@@ -54,8 +54,8 @@ jobs:
           commit_message: "Merge to main branch"
           commit_options: '--no-verify --signoff'
           branch: 'main'
-          commit_author: ${{ github.actor }}
-          commit_user_email: ${{ github.actor }}@users.noreply.github.com
+          commit_author: ${{ github.name }}
+          commit_user_email: ${{ github.email }}
         env:
           GITHUB_TOKEN: ${{secrets.TOKEN_GIT}}
         continue-on-error: false
