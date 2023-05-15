@@ -46,23 +46,23 @@ jobs:
           vercel-project-id: prj_R5mBcWd8plLoPoCNiP8Wl0KZxLO6
         continue-on-error: false
 
-#       # Merge to main branch
-#       - name: Merge to Main
-#         if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main' # Only merge on successful push to main branch
-#         uses: 'stefanzweifel/git-auto-commit-action@v4'
-#         with:
-#           commit_message: "Merge to main branch"
-#           commit_options: '--no-verify --signoff'
-#           branch: 'main'
-#           commit_author: ${{ github.name }}
-#           commit_user_email: ${{ github.email }}
-#         env:
-#           GITHUB_TOKEN: ${{secrets.TOKEN_GIT}}
-#         continue-on-error: false
       # Merge to main branch
       - name: Merge to Main
         if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main' # Only merge on successful push to main branch
-        run: git merge origin/main --no-edit
+        uses: 'stefanzweifel/git-auto-commit-action@v4'
+        with:
+          commit_message: "Merge to main branch"
+          commit_options: '--no-verify --signoff'
+          branch: 'main'
+          commit_user_name: ${{ github.name }}
+          commit_user_email: ${{ github.email }}@users.noreply.github.com
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{secrets.TOKEN_GIT}}
         continue-on-error: false
+#       # Merge to main branch
+#       - name: Merge to Main
+#         if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main' # Only merge on successful push to main branch
+#         run: git merge origin/main --no-edit
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         continue-on-error: false
