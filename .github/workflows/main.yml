@@ -85,24 +85,18 @@ jobs:
         continue-on-error: false
 
 
-      - name: Automatic Repo Sync
-        uses: Anthonykung/RepoSync@v1.4.2
-        with:
-          RS_TARGET: ${{ env.TARGET_REPO }}
-          RS_PAT: ${{ secrets.GITHUB_TOKEN }}
-          
-#       - name: Copy source to target and push
-#         run: |
-#           git config user.name github-actions
-#           git config user.email github-actions@github.com
-#           rsync -r --exclude '.git' $GITHUB_WORKSPACE/source/* $GITHUB_WORKSPACE/target
-#           cd $GITHUB_WORKSPACE/target && git add -A && git commit -am "Generated update from RepoSync GitHub Action" && git push
-# #           git config user.name "${{ github.actor }}"  # Use the GitHub username as the Git user name
-# #           git config user.email "${{ github.actor }}@users.noreply.github.com"  # Use a noreply email associated with the GitHub username
-# #           git add .
-# #           git commit -m "${{ github.event.head_commit.message }}"  # Use the commit message from the push event
-# #           git push
-# #         env:
-# #           REPO_1_TOKEN: ${{ env.TARGET_REPO }}
-# #           GIT_TRACE: "1" # Add this line to enable Git tracing
-        
+#       - name: Automatic Repo Sync
+#         uses: Anthonykung/RepoSync@v1.4.2
+#         with:
+#           RS_TARGET: ${{ env.TARGET_REPO }}
+#           RS_PAT: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update Repos
+        run: |
+          # Replace the commands below with the necessary commands to update the repositories
+          git config user.name "${{ github.actor }}"  # Use the GitHub username as the Git user name
+          git config user.email "${{ github.actor }}@users.noreply.github.com"  # Use a noreply email associated with the GitHub username
+          git add .
+          git commit -m "${{ github.event.head_commit.message }}"  # Use the commit message from the push event
+          git push
+        env:
+          TARGET_REPO: ${{ secrets.TARGET_REPO }}
