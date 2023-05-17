@@ -75,6 +75,7 @@ jobs:
 #         env:
 #           GITHUB_TOKEN: ${{secrets.TOKEN_GIT}}
 #         continue-on-error: false
+
       # Merge to main branch
       - name: Merge to Main
         if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main' # Only merge on successful push to main branch
