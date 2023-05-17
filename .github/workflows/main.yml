@@ -94,8 +94,7 @@ jobs:
           git config user.name "${{ github.actor }}"  # Use the GitHub username as the Git user name
           git config user.email "${{ github.actor }}@users.noreply.github.com"  # Use a noreply email associated with the GitHub username
           git add .
-          git commit -m "${{ gienv:
-          thub.event.head_commit.message }}"  # Use the commit message from the push event
+          git commit -m "${{ github.event.head_commit.message }}"  # Use the commit message from the push event
           git push
         env:
           REPO_1_TOKEN: ${{ env.TARGET_REPO }}
