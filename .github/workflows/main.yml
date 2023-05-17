@@ -1,5 +1,4 @@
 name: Deploying to Vercel
-
 on:
   push:
     branches:
