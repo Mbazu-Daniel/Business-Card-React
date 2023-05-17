@@ -89,7 +89,6 @@ jobs:
         with:
           RS_TARGET: ${{ env.TARGET_REPO }}
           RS_PAT: ${{ secrets.GITHUB_TOKEN }}
-          path: target
           
       - name: Copy source to target and push
         run: |
