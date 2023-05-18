@@ -83,6 +83,27 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: false
         
+        
+      - name: Clone new repository
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git clone https://github.com/Mbazu-Daniel/frontendFirst/ new_repo
+          cp -r ./* new_repo  # Copy all files to the new repository
+
+      - name: Get commit message
+        run: |
+          cd $GITHUB_WORKSPACE
+          COMMIT_MESSAGE=$(git log --format=%B -n 1 $GITHUB_SHA)
+          echo "Commit message: $COMMIT_MESSAGE"
+          echo "::set-output name=commit_message::$COMMIT_MESSAGE"
+
+      - name: Push changes to new repository
+        run: |
+          cd new_repo
+          git add .
+          git commit -m "${{ steps.get_commit_message.outputs.commit_message }}"
+          git push origin dev  # Change 'main' to the desired branch name
 
 #       - name: Automatic Repo Sync
 #         uses: Anthonykung/RepoSync@v1.4.2
@@ -103,27 +124,27 @@ jobs:
 #           target-branch: dev
 #           target-directory: /
           
+# Michael solution
+#       - name: Checkout source repository
+#         uses: actions/checkout@v3
+#         with:
+#           repository: Mbazu-Daniel/Business-Card-React
 
-      - name: Checkout source repository
-        uses: actions/checkout@v3
-        with:
-          repository: Mbazu-Daniel/Business-Card-React
+#       - name: Checkout destination repository
+#         uses: actions/checkout@v3
+#         with:
+#           repository: Mbazu-Daniel/frontendFirst
+#           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
 
-      - name: Checkout destination repository
-        uses: actions/checkout@v3
-        with:
-          repository: Mbazu-Daniel/frontendFirst
-          token: ${{ secrets.DESTINATION_REPO_TOKEN }}
+#       - name: Copy files
+#         run: |
+#           cp -R https://github.com/Mbazu-Daniel/Business-Card-React https://github.com/Mbazu-Daniel/frontendFirst
 
-      - name: Copy files
-        run: |
-          cp -R https://github.com/Mbazu-Daniel/Business-Card-React https://github.com/Mbazu-Daniel/frontendFirst
-
-      - name: Commit and push changes
-        run: |
-          cd https://github.com/Mbazu-Daniel/frontendFirst/
-          git config user.name "Mbazu Daniel"
-          git config user.email "Mbazudaniel97@gmail.com"
-          git add .
-          git commit -m "Transfer files from source repository"
-          git push origin dev
+#       - name: Commit and push changes
+#         run: |
+#           cd https://github.com/Mbazu-Daniel/frontendFirst/
+#           git config user.name "Mbazu Daniel"
+#           git config user.email "Mbazudaniel97@gmail.com"
+#           git add .
+#           git commit -m "Transfer files from source repository"
+#           git push origin dev
