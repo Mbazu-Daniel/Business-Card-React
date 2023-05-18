@@ -96,7 +96,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
         with:
-          source-directory: 'https://github.com/Mbazu-Daniel/Business-Card-React'
+          source-directory: 'https://github.com/Mbazu-Daniel'
           target-branch: "main"
           destination-github-username: 'Mbazu-Daniel'
           destination-repository-name: 'frontendFirst'
