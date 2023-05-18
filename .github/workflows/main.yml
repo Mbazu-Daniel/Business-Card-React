@@ -107,24 +107,23 @@ jobs:
       - name: Checkout source repository
         uses: actions/checkout@v3
         with:
-          path: https://github.com/Mbazu-Daniel/Business-Card-React/
+          repository: Mbazu-Daniel/Business-Card-React
 
       - name: Checkout destination repository
         uses: actions/checkout@v3
         with:
           repository: Mbazu-Daniel/frontendFirst
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
-          path: https://github.com/Mbazu-Daniel/frontendFirst/
 
       - name: Copy files
         run: |
-          cp -R https://github.com/Mbazu-Daniel/Business-Card-React/* https://github.com/Mbazu-Daniel/frontendFirst
+          cp -R ./* Mbazu-Daniel/frontendFirst/
 
       - name: Commit and push changes
         run: |
-          cd https://github.com/Mbazu-Daniel/frontendFirst/
+          cd Mbazu-Daniel/frontendFirst/
           git config user.name "Mbazu Daniel"
           git config user.email "Mbazudaniel97@gmail.com"
           git add .
           git commit -m "Transfer files from source repository"
-          git push origin dev
+          git push origin dev
