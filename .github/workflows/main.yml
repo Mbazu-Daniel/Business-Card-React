@@ -122,7 +122,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          cd destination-repo
+          cd https://github.com/Mbazu-Daniel/frontendFirst/
           git config user.name "Mbazu Daniel"
           git config user.email "Mbazudaniel97@gmail.com"
           git add .
