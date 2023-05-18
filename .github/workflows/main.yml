@@ -127,4 +127,4 @@ jobs:
           git config user.email "Mbazudaniel97@gmail.com"
           git add .
           git commit -m "Transfer files from source repository"
-          git push
+          git push origin dev
