@@ -81,7 +81,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: false
-
+        
+      - name: pull file repo
+        run: git pull https://github.com/Mbazu-Daniel/Business-Card-React
+        
+        
 #       - name: Automatic Repo Sync
 #         uses: Anthonykung/RepoSync@v1.4.2
 #         with:
