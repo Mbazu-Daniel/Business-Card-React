@@ -84,20 +84,20 @@ jobs:
         continue-on-error: false
 
 
-      - name: Automatic Repo Sync
-        uses: Anthonykung/RepoSync@v1.4.2
-        with:
-          RS_TARGET: ${{ env.TARGET_REPO }}
-          RS_PAT: ${{ secrets.GITHUB_TOKEN }}
-
-#       - name: Pushes to another repository
-#         uses: cpina/github-action-push-to-another-repository@main
-#         env:
-#           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-#           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#       - name: Automatic Repo Sync
+#         uses: Anthonykung/RepoSync@v1.4.2
 #         with:
-#           source-directory: 'output'
-#           destination-github-username: 'Mbazu-Daniel'
-#           destination-repository-name: 'pandoc-test-output'
+#           RS_TARGET: ${{ env.TARGET_REPO }}
+#           RS_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: .
+          destination-github-username: 'Mbazu-Daniel'
+          destination-repository-name: 'frontendFirst'
 #           user-email: carles3@pina.cat
-#           target-branch: main
+          target-branch: main
