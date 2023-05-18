@@ -83,26 +83,48 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: false
         
-      - name: pull file repo
-        run: git pull https://github.com/Mbazu-Daniel/Business-Card-React
-      
-        
+
 #       - name: Automatic Repo Sync
 #         uses: Anthonykung/RepoSync@v1.4.2
 #         with:
 #           RS_TARGET: ${{ env.TARGET_REPO }}
 #           RS_PAT: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          source-directory: .
-          destination-github-username: 'Mbazu-Daniel'
-          destination-repository-name: 'frontendFirst'
-          user-email: Mbazudaniel97@gmail.com 
-          target-branch: dev
-          target-directory: /
+#       - name: Pushes to another repository
+#         uses: cpina/github-action-push-to-another-repository@main
+#         env:
+#           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+#           API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           source-directory: .
+#           destination-github-username: 'Mbazu-Daniel'
+#           destination-repository-name: 'frontendFirst'
+#           user-email: Mbazudaniel97@gmail.com 
+#           target-branch: dev
+#           target-directory: /
           
+
+      - name: Checkout source repository
+        uses: actions/checkout@v3
+        with:
+          path: https://github.com/Mbazu-Daniel/Business-Card-React/
+
+      - name: Checkout destination repository
+        uses: actions/checkout@v3
+        with:
+          repository: Mbazu-Danniel/frontendFirst
+          token: ${{ secrets.DESTINATION_REPO_TOKEN }}
+          path: https://github.com/Mbazu-Daniel/frontendFirst/
+
+      - name: Copy files
+        run: |
+          cp -R https://github.com/Mbazu-Daniel/Business-Card-React/* https://github.com/Mbazu-Daniel/frontendFirst
+
+      - name: Commit and push changes
+        run: |
+          cd destination-repo
+          git config user.name "Mbazu Daniel"
+          git config user.email "Mbazudaniel97@gmail.com"
+          git add .
+          git commit -m "Transfer files from source repository"
+          git push
