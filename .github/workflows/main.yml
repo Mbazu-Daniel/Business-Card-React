@@ -90,7 +90,6 @@ jobs:
 #         with:
 #           RS_TARGET: ${{ env.TARGET_REPO }}
 #           RS_PAT: ${{ secrets.GITHUB_TOKEN }}
-#           node-version: 16
 
       - name: Pushes to another repository
         uses: vinayb21/github-action-push-to-another-repo@master
@@ -101,3 +100,4 @@ jobs:
           destination-github-username: 'Mbazu-Daniel'
           destination-repository-name: 'frontendFirst'
           user-email: "mbazudaniel97@gmail.com"
+
