@@ -85,21 +85,19 @@ jobs:
         continue-on-error: false
 
 
-      - name: Automatic Repo Sync
-        uses: Anthonykung/RepoSync@v1.4.2
+#       - name: Automatic Repo Sync
+#         uses: Anthonykung/RepoSync@v1.4.2
+#         with:
+#           RS_TARGET: ${{ env.TARGET_REPO }}
+#           RS_PAT: ${{ secrets.GITHUB_TOKEN }}
+#           node-version: 16
+
+      - name: Pushes to another repository
+        uses: vinayb21/github-action-push-to-another-repo@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
         with:
-          RS_TARGET: ${{ env.TARGET_REPO }}
-          RS_PAT: ${{ secrets.GITHUB_TOKEN }}
-          node-version: 16
-#       - name: Update Repos
-#         run: |
-#           # Replace the commands below with the necessary commands to update the repositories
-#           git config user.name "${{ github.actor }}"  # Use the GitHub username as the Git user name
-#           git config user.email "${{ github.actor }}@users.noreply.github.com"  # Use a noreply email associated with the GitHub username
-#           git pull origin main
-#           git add .
-#           git commit -m "${{ github.event.head_commit.message }}"  # Use the commit message from the push event
-#           git push --force
-#         env:
-#           TARGET_REPO: ${{ secrets.TARGET_REPO }}
-          
+          source-directory: 'https://github.com/Mbazu-Daniel/Business-Card-React/'
+          destination-github-username: 'Mbazu-Daniel'
+          destination-repository-name: 'frontendFirst'
+          user-email: "mbazudaniel97@gmail.com"
