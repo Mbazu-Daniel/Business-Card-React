@@ -26,41 +26,41 @@ jobs:
           node-version: 16
 
 
-      # Install dependencies
-      - name: Install Dependencies
-        run: yarn install
-        continue-on-error: false
+#       # Install dependencies
+#       - name: Install Dependencies
+#         run: yarn install
+#         continue-on-error: false
 
-      # Build the app
-      - name: Build
-        if: success() || failure() # Run even if tests fail
-        run: yarn run build
-        continue-on-error: false
+#       # Build the app
+#       - name: Build
+#         if: success() || failure() # Run even if tests fail
+#         run: yarn run build
+#         continue-on-error: false
 
-      # Deploy to Vercel
-      - name: Deploy to Vercel
-        if: success() && github.ref == 'refs/heads/main' # Only deploy on successful push to main branch
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: jvCrSsQzBxvOptQnDziZxKL1
-          vercel-project-id: prj_R5mBcWd8plLoPoCNiP8Wl0KZxLO6
-        continue-on-error: false
+#       # Deploy to Vercel
+#       - name: Deploy to Vercel
+#         if: success() && github.ref == 'refs/heads/main' # Only deploy on successful push to main branch
+#         uses: amondnet/vercel-action@v25
+#         with:
+#           vercel-token: ${{ secrets.VERCEL_TOKEN }}
+#           vercel-org-id: jvCrSsQzBxvOptQnDziZxKL1
+#           vercel-project-id: prj_R5mBcWd8plLoPoCNiP8Wl0KZxLO6
+#         continue-on-error: false
         
-      - name: Deploy to Netlify
-        uses: nwtgck/actions-netlify@v2.0
-        with:
-          publish-dir: './dist'
-          production-branch: master
-          github-token: ${{ secrets.TOKEN_GIT }}
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: false
-          enable-commit-comment: true
-          overwrites-pull-request-comment: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 1
+#       - name: Deploy to Netlify
+#         uses: nwtgck/actions-netlify@v2.0
+#         with:
+#           publish-dir: './dist'
+#           production-branch: master
+#           github-token: ${{ secrets.TOKEN_GIT }}
+#           deploy-message: "Deploy from GitHub Actions"
+#           enable-pull-request-comment: false
+#           enable-commit-comment: true
+#           overwrites-pull-request-comment: true
+#         env:
+#           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+#         timeout-minutes: 1
 
 #       # Merge to main branch
 #       - name: Merge to Main
@@ -96,7 +96,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
         with:
-          source-directory: 'https://github.com/Mbazu-Daniel/Business-Card-React/'
+          source-directory: 'Business-Card-React'
           destination-github-username: 'Mbazu-Daniel'
           destination-repository-name: 'frontendFirst'
           user-email: "mbazudaniel97@gmail.com"
