@@ -117,11 +117,11 @@ jobs:
 
       - name: Copy files
         run: |
-          cp -R ./* Mbazu-Daniel/frontendFirst/
+          cp -R https://github.com/Mbazu-Daniel/Business-Card-React/* https://github.com/Mbazu-Daniel/frontendFirst
 
       - name: Commit and push changes
         run: |
-          cd Mbazu-Daniel/frontendFirst/
+          cd https://github.com/Mbazu-Daniel/frontendFirst/
           git config user.name "Mbazu Daniel"
           git config user.email "Mbazudaniel97@gmail.com"
           git add .
