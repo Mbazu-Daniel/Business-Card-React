@@ -87,8 +87,6 @@ jobs:
 #         with:
 #           RS_TARGET: ${{ env.TARGET_REPO }}
 #           RS_PAT: ${{ secrets.GITHUB_TOKEN }}
-      - name: update remote origin
-        run: "git remote set-url origin git@github.com:Mbazu-Daniel/frontendFirst.git"
 
       - name: Pushes to another repository
         uses: cpina/github-action-push-to-another-repository@main
