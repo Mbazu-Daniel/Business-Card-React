@@ -112,7 +112,7 @@ jobs:
       - name: Checkout destination repository
         uses: actions/checkout@v3
         with:
-          repository: Mbazu-Danniel/frontendFirst
+          repository: Mbazu-Daniel/frontendFirst
           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
           path: https://github.com/Mbazu-Daniel/frontendFirst/
 
