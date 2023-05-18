@@ -102,4 +102,6 @@ jobs:
           destination-github-username: 'Mbazu-Daniel'
           destination-repository-name: 'frontendFirst'
           user-email: Mbazudaniel97@gmail.com 
-          target-branch: main
+          create-target-branch-if-needed: true
+          target-branch: dev
+          
