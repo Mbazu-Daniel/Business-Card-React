@@ -117,7 +117,7 @@ jobs:
 
       - name: Copy files
         run: |
-          cp -R https://github.com/Mbazu-Daniel/Business-Card-React/* https://github.com/Mbazu-Daniel/frontendFirst
+          cp -R https://github.com/Mbazu-Daniel/Business-Card-React https://github.com/Mbazu-Daniel/frontendFirst
 
       - name: Commit and push changes
         run: |
