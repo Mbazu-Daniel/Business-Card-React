@@ -19,61 +19,61 @@ jobs:
         with:
           ref: main
 
-#       # Install Node.js 16
-#       - name: Setup Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 16
+      # Install Node.js 16
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
 
-#       # Install dependencies
-#       - name: Install Dependencies
-#         run: yarn install
-#         continue-on-error: false
+      # Install dependencies
+      - name: Install Dependencies
+        run: yarn install
+        continue-on-error: false
 
-#       # Build the app
-#       - name: Build
-#         if: success() || failure() # Run even if tests fail
-#         run: yarn run build
-#         continue-on-error: false
+      # Build the app
+      - name: Build
+        if: success() || failure() # Run even if tests fail
+        run: yarn run build
+        continue-on-error: false
 
-#       # Deploy to Vercel
-#       - name: Deploy to Vercel
-#         if: success() && github.ref == 'refs/heads/main' # Only deploy on successful push to main branch
-#         uses: amondnet/vercel-action@v25
-#         with:
-#           vercel-token: ${{ secrets.VERCEL_TOKEN }}
-#           vercel-org-id: jvCrSsQzBxvOptQnDziZxKL1
-#           vercel-project-id: prj_R5mBcWd8plLoPoCNiP8Wl0KZxLO6
-#         continue-on-error: false
+      # Deploy to Vercel
+      - name: Deploy to Vercel
+        if: success() && github.ref == 'refs/heads/main' # Only deploy on successful push to main branch
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: jvCrSsQzBxvOptQnDziZxKL1
+          vercel-project-id: prj_R5mBcWd8plLoPoCNiP8Wl0KZxLO6
+        continue-on-error: false
         
-#       - name: Deploy to Netlify
-#         uses: nwtgck/actions-netlify@v2.0
-#         with:
-#           publish-dir: './dist'
-#           production-branch: master
-#           github-token: ${{ secrets.TOKEN_GIT }}
-#           deploy-message: "Deploy from GitHub Actions"
-#           enable-pull-request-comment: false
-#           enable-commit-comment: true
-#           overwrites-pull-request-comment: true
-#         env:
-#           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-#           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-#         timeout-minutes: 1
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: './dist'
+          production-branch: master
+          github-token: ${{ secrets.TOKEN_GIT }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
 
-#       # Merge to main branch
-#       - name: Merge to Main
-#         if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main' # Only merge on successful push to main branch
-#         uses: 'stefanzweifel/git-auto-commit-action@v4'
-#         with:
-#           commit_message: "Merge to main branch"
-#           commit_options: '--no-verify --signoff'
-#           branch: 'main'
-#           commit_user_name: ${{ github.name }}
-#           commit_user_email: ${{ github.email }}@users.noreply.github.com
-#         env:
-#           GITHUB_TOKEN: ${{secrets.TOKEN_GIT}}
-#         continue-on-error: false
+      # Merge to main branch
+      - name: Merge to Main
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/main' # Only merge on successful push to main branch
+        uses: 'stefanzweifel/git-auto-commit-action@v4'
+        with:
+          commit_message: "Merge to main branch"
+          commit_options: '--no-verify --signoff'
+          branch: 'main'
+          commit_user_name: ${{ github.name }}
+          commit_user_email: ${{ github.email }}@users.noreply.github.com
+        env:
+          GITHUB_TOKEN: ${{secrets.TOKEN_GIT}}
+        continue-on-error: false
 
       # Merge to main branch
       - name: Merge to Main
@@ -84,67 +84,4 @@ jobs:
         continue-on-error: false
         
         
-      - name: Clone new repository
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git clone https://github.com/Mbazu-Daniel/Business-Card-React new_repo
-          cp -r new_repo https://github.com/Mbazu-Daniel/frontendFirst  # Copy all files to the new repository
-
-      - name: Get commit message
-        run: |
-          cd $GITHUB_WORKSPACE
-          COMMIT_MESSAGE=$(git log --format=%B -n 1 $GITHUB_SHA)
-          echo "Commit message: $COMMIT_MESSAGE"
-          echo "::set-output name=commit_message::$COMMIT_MESSAGE"
-
-      - name: Push changes to new repository
-        run: |
-          cd new_repo
-          git add .
-          git commit -m "${{ steps.get_commit_message.outputs.commit_message }}"
-          git push origin dev  # Change 'main' to the desired branch name
-
-#       - name: Automatic Repo Sync
-#         uses: Anthonykung/RepoSync@v1.4.2
-#         with:
-#           RS_TARGET: ${{ env.TARGET_REPO }}
-#           RS_PAT: ${{ secrets.GITHUB_TOKEN }}
-
-#       - name: Pushes to another repository
-#         uses: cpina/github-action-push-to-another-repository@main
-#         env:
-#           SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-#           API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           source-directory: .
-#           destination-github-username: 'Mbazu-Daniel'
-#           destination-repository-name: 'frontendFirst'
-#           user-email: Mbazudaniel97@gmail.com 
-#           target-branch: dev
-#           target-directory: /
-          
-# Michael solution
-#       - name: Checkout source repository
-#         uses: actions/checkout@v3
-#         with:
-#           repository: Mbazu-Daniel/Business-Card-React
-
-#       - name: Checkout destination repository
-#         uses: actions/checkout@v3
-#         with:
-#           repository: Mbazu-Daniel/frontendFirst
-#           token: ${{ secrets.DESTINATION_REPO_TOKEN }}
-
-#       - name: Copy files
-#         run: |
-#           cp -R https://github.com/Mbazu-Daniel/Business-Card-React https://github.com/Mbazu-Daniel/frontendFirst
-
-#       - name: Commit and push changes
-#         run: |
-#           cd https://github.com/Mbazu-Daniel/frontendFirst/
-#           git config user.name "Mbazu Daniel"
-#           git config user.email "Mbazudaniel97@gmail.com"
-#           git add .
-#           git commit -m "Transfer files from source repository"
-#           git push origin dev
+ 
